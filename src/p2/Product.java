@@ -6,13 +6,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Product implements Serializable {
-    int id;
-    String name;
-    float price;
-    File image;
-    int existance;
-    int deal;            //Percentage
-    String description;
+    private int id;
+    private String name;
+    private float price;
+    private File image;
+    private int existance;
+    private int deal;            //Percentage
+    private String description;
     
     static ArrayList ids = new ArrayList();
     //static String path = "C:\\Users\\alumno\\Desktop\\";
@@ -42,8 +42,8 @@ public class Product implements Serializable {
         ids.add(id);
     }
     
-    public static int newID(){
-        int idcheck = 1;
+    private static int newID(){
+        int idcheck = 0;
         
         for (int i = 0; i < ids.size(); i++){
             if(idcheck == (int)ids.get(i)){
@@ -51,6 +51,8 @@ public class Product implements Serializable {
                 i = 0;
             }
         }
+        
+        ids.add(idcheck);
         
         return idcheck;
     }
@@ -81,6 +83,10 @@ public class Product implements Serializable {
 
     public String getDescription() {
         return description;
+    }
+    
+    public void printProduct(){
+        System.out.println(id + ". " + name + "\t $" + price);
     }
     
 }

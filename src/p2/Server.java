@@ -19,7 +19,9 @@ public class Server {
             ServerSocket s = new ServerSocket(pto);
 
             ArrayList<Product> menu = new ArrayList<Product>();
-
+            ArrayList<Order> orders = new ArrayList<Order>();
+            Ticket ticket;
+            
             menu = createMenu(menu);
             
             System.out.println("Restaurante abierto, esperando clientes...");
@@ -28,16 +30,29 @@ public class Server {
                 Socket cl = s.accept();
                 System.out.println("Cliente entrando...");
                 
-                ObjectOutputStream dos = new ObjectOutputStream(cl.getOutputStream());
+                ObjectOutputStream oos = new ObjectOutputStream(cl.getOutputStream());
                 
                 System.out.println("Entregando carta...");
-                dos.writeObject(menu);
-                dos.flush();
+                oos.writeObject(menu);
+                oos.flush();
                 
                 System.out.println("Tomando orden...");
                 
+                /*
+                Recibe la orden
+                ObjectInputStream ois para recibir
+                se añade a orders ( orders.add(ois.read()) )
+                */
                 
-                dos.close();
+                /*
+                Generar ticket antes de la desconexión del cliente
+                se manda el menu y la orden del cliente 
+                al constructor del ticket
+                */
+                
+                
+                oos.close();
+                //cerrar ois
             }
         
         } catch (Exception e){
