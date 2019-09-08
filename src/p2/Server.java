@@ -39,7 +39,8 @@ public class Server {
                 oos.writeObject(menu);
                 oos.flush();
                 
-                int option= dis.readInt();
+                /*int option= dis.readInt();
+                
                 
                 if( option == 1 ){
                     //Server receives an Order object, then sends a Ticket
@@ -47,7 +48,7 @@ public class Server {
                 else if( option == 0 ){
                     //Client disconected, receives a menu to update existance quantities
                 }
-                
+                */
                 
                 oos.close();
                 //cerrar ois
@@ -62,7 +63,7 @@ public class Server {
     public static ArrayList<Product> createMenu(ArrayList<Product> m){
         String name;
         float price;
-        File img;
+        File [] img;
         int exists;
         int deal;
         String desc;
@@ -70,8 +71,11 @@ public class Server {
         
         name = "Pizza de Peperoni";
         price = 79.00f;
-        img = new File(path + "images\\pizzaPepe.jpg");
-        exists = 74;
+        img = new File[3];
+        img[0]=new File(path + "images\\pizzaPepe0.png");
+        img[1]=new File(path + "images\\pizzaPepe1.png");
+        img[2]=new File(path + "images\\pizzaPepe2.png");
+        exists = 0;
         deal = 10;
         desc = "<html><body>\"La mejor pizza del área metropolitana, cocinada por los dioses de las pizzas\"</body></html>";
         shortName="pizza";
@@ -79,7 +83,10 @@ public class Server {
         
         name = "Hamburguesa de Pollo";
         price = 53.00f;
-        img = new File(path + "images\\hamPollo.jpg");
+        img = new File[3];
+        img[0]=new File(path + "images\\hamPollo0.jpg");
+        img[1]=new File(path + "images\\hamPollo1.jpg");
+        img[2]=new File(path + "images\\hamPollo2.jpg");
         exists = 13;
         deal = 15;
         desc = "<html><body>\"La mejor hamburguesa del área metropolitana, cocinada por Bob Esponja\"</body></html>";
@@ -88,7 +95,10 @@ public class Server {
         
         name = "Papas a la Francesa";
         price = 30.00f;
-        img = new File(path + "images\\papas.jpg");
+        img = new File[3];
+        img[0]=new File(path + "images\\papas0.jpg");
+        img[1]=new File(path + "images\\papas1.jpg");
+        img[2]=new File(path + "images\\papas2.jpg");
         exists = 27;
         deal = 5;
         desc = "<html><body>\"Deliciosas papas, no puedes comer solo una\"</body></html>";
@@ -97,7 +107,10 @@ public class Server {
         
         name = "Hot Dog";
         price = 45.00f;
-        img = new File(path + "images\\hotdog.jpg");
+        img = new File[3];
+        img[0]=new File(path + "images\\hotdog0.png");
+        img[1]=new File(path + "images\\hotdog1.png");
+        img[2]=new File(path + "images\\hotdog2.png");
         exists = 16;
         deal = 0;
         desc = "<html><body>\"Hot Dogs caseros. Come bien a un precio accesible\"</body></html>";
@@ -106,7 +119,10 @@ public class Server {
         
         name = "Torta";
         price = 30.00f;
-        img = new File(path + "images\\tortas.jpg");
+        img = new File[3];
+        img[0]=new File(path + "images\\tortas0.jpg");
+        img[1]=new File(path + "images\\tortas1.jpg");
+        img[2]=new File(path + "images\\tortas2.jpg");
         exists = 27;
         deal = 5;
         desc = "<html><body>\"Las tortas más grandes del área metropolitana\"</body></html>";
@@ -115,7 +131,10 @@ public class Server {
         
         name = "Refresco";
         price = 15.00f;
-        img = new File(path + "images\\refresco.jpg");
+        img = new File[3];
+        img[0]=new File(path + "images\\refresco0.jpg");
+        img[1]=new File(path + "images\\refresco1.jpg");
+        img[2]=new File(path + "images\\refresco2.jpg");
         exists = 99;
         deal = 0;
         desc = "<html><body>\"Refrescante, no te quedes con sed\"</body></html>";

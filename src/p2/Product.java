@@ -9,7 +9,7 @@ public class Product implements Serializable {
     private int id;
     private String name;
     private float price;
-    private File image;
+    private File [] image;
     private int existance;
     private int deal;            //Percentage
     private String description;
@@ -17,13 +17,15 @@ public class Product implements Serializable {
     
     static ArrayList ids = new ArrayList();
     //static String path = "C:\\Users\\alumno\\Desktop\\";
-    static String path = "C:\\Users\\grafi_000\\Desktop\\";
+    //static String path = "C:\\Users\\grafi_000\\Desktop\\";
+    static String path = "C:\\Users\\chistopher\\Desktop\\";
     
     public Product(){
         id = newID();
         name = "Producto " + id;
         price = 10.0f;
-        image = new File(path + "Server\\images\\default.jpg");
+        image = new File[1];
+        image[0]=new File(path + "Server\\images\\default.jpg");
         existance = 100;
         deal = 0;
         description = "Default Product";
@@ -32,7 +34,7 @@ public class Product implements Serializable {
         ids.add(id);
     }
     
-    public Product(String name, float price, File img, int exists, int deal, String desc, String shortName){
+    public Product(String name, float price, File []img, int exists, int deal, String desc, String shortName){
         id = newID();
         this.name = name;
         this.price = price;
@@ -72,7 +74,7 @@ public class Product implements Serializable {
         return price;
     }
 
-    public File getImage() {
+    public File [] getImage() {
         return image;
     }
 
@@ -90,6 +92,10 @@ public class Product implements Serializable {
     
     public String getShortName(){
         return shortName;
+    }
+
+    public void setExistance(int existance) {
+        this.existance = existance;
     }
     
     public void printProduct(){

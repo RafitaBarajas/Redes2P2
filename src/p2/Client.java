@@ -30,8 +30,11 @@ public class Client {
             menu = (ArrayList<Product>)ois.readObject();
             order= new Order();
             
-            MainPage restaurante = new MainPage(cl, menu, order);
+            MainPage r = new MainPage(cl, menu, order);
             
+
+            
+            //oos.close();
             ois.close();
 
             
