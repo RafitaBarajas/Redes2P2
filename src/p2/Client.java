@@ -1,6 +1,8 @@
 
 package p2;
 
+import UIs.MainPage;
+
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -9,12 +11,14 @@ public class Client {
 
     static int pto = 9000;
     static String host = "localhost";
-    static String path = "C:\\Users\\Rafael Barajas\\Desktop\\";
+    //static String path = "C:\\Users\\Rafael Barajas\\Desktop\\";
     //static String path = "C:\\Users\\alumno\\Desktop\\";
+    static String path = "C:\\Users\\chistopher\\Desktop\\";
     
     public static void main(String[] args) {
         
         ArrayList<Product> menu = new ArrayList<Product>();
+        Order order;
         
         try{
             Socket cl = new Socket(host, pto);
@@ -24,23 +28,12 @@ public class Client {
             
             System.out.println("Recibiendo carta");
             menu = (ArrayList<Product>)ois.readObject();
+            order= new Order();
             
-            System.out.println("Mmmm... Quiero...");
+            MainPage restaurante = new MainPage(cl, menu, order);
             
-            /*
-            Hacer ciclo donde el cliente vaya seleccionando productos
-            con su cantidad
-            e irlo añadiendo a un objeto Order
-            
-            al cuando el cliente haya terminado de aregar productos
-            mandarlo por un ObjectOutputStream oos
-            
-            recibir por ois el ticket.
-            */
-            
-            //oos.close();
             ois.close();
-            
+
             
         } catch(Exception e){
             

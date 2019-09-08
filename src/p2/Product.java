@@ -13,6 +13,7 @@ public class Product implements Serializable {
     private int existance;
     private int deal;            //Percentage
     private String description;
+    private String shortName;
     
     static ArrayList ids = new ArrayList();
     //static String path = "C:\\Users\\alumno\\Desktop\\";
@@ -26,11 +27,12 @@ public class Product implements Serializable {
         existance = 100;
         deal = 0;
         description = "Default Product";
+        shortName="default";
         
         ids.add(id);
     }
     
-    public Product(String name, float price, File img, int exists, int deal, String desc){
+    public Product(String name, float price, File img, int exists, int deal, String desc, String shortName){
         id = newID();
         this.name = name;
         this.price = price;
@@ -38,6 +40,7 @@ public class Product implements Serializable {
         this.existance = exists;
         this.deal = deal;
         this.description = desc;
+        this.shortName = shortName;
         
         ids.add(id);
     }
@@ -83,6 +86,10 @@ public class Product implements Serializable {
 
     public String getDescription() {
         return description;
+    }
+    
+    public String getShortName(){
+        return shortName;
     }
     
     public void printProduct(){

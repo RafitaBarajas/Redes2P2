@@ -1,6 +1,7 @@
 
 package p2;
 
+import java.io.DataInputStream;
 import java.io.ObjectOutputStream;
 import java.io.File;
 import java.net.ServerSocket;
@@ -10,7 +11,8 @@ import java.util.ArrayList;
 public class Server {
     
     //static String path = "C:\\Users\\alumno\\Desktop\\Server\\";
-    static String path = "C:\\Users\\grafi_000\\Desktop\\Server\\";
+    //static String path = "C:\\Users\\grafi_000\\Desktop\\Server\\";
+    static String path ="C:\\Users\\chistopher\\Desktop\\Server\\";
 
     public static void main(String[] args) {
         
@@ -31,24 +33,20 @@ public class Server {
                 System.out.println("Cliente entrando...");
                 
                 ObjectOutputStream oos = new ObjectOutputStream(cl.getOutputStream());
+                DataInputStream dis = new DataInputStream(cl.getInputStream());
                 
                 System.out.println("Entregando carta...");
                 oos.writeObject(menu);
                 oos.flush();
                 
-                System.out.println("Tomando orden...");
+                int option= dis.readInt();
                 
-                /*
-                Recibe la orden
-                ObjectInputStream ois para recibir
-                se añade a orders ( orders.add(ois.read()) )
-                */
-                
-                /*
-                Generar ticket antes de la desconexión del cliente
-                se manda el menu y la orden del cliente 
-                al constructor del ticket
-                */
+                if( option == 1 ){
+                    //Server receives an Order object, then sends a Ticket
+                }
+                else if( option == 0 ){
+                    //Client disconected, receives a menu to update existance quantities
+                }
                 
                 
                 oos.close();
@@ -61,12 +59,6 @@ public class Server {
         
     }
     
-    public String sendMenu(){
-        
-        
-        return "";
-    }
-    
     public static ArrayList<Product> createMenu(ArrayList<Product> m){
         String name;
         float price;
@@ -74,54 +66,61 @@ public class Server {
         int exists;
         int deal;
         String desc;
+        String shortName;
         
         name = "Pizza de Peperoni";
         price = 79.00f;
         img = new File(path + "images\\pizzaPepe.jpg");
         exists = 74;
         deal = 10;
-        desc = "La mejor pizza del área metropolitana, cocinada por los mismos dioses de las pizzas";
-        m.add(new Product(name, price, img, exists, deal, desc));
+        desc = "<html><body>\"La mejor pizza del área metropolitana, cocinada por los dioses de las pizzas\"</body></html>";
+        shortName="pizza";
+        m.add(new Product(name, price, img, exists, deal, desc, shortName));
         
         name = "Hamburguesa de Pollo";
         price = 53.00f;
         img = new File(path + "images\\hamPollo.jpg");
         exists = 13;
         deal = 15;
-        desc = "La mejor hamburguesa del área metropolitana, cocinada por los mismos dioses de las pizzas";
-        m.add(new Product(name, price, img, exists, deal, desc));
+        desc = "<html><body>\"La mejor hamburguesa del área metropolitana, cocinada por Bob Esponja\"</body></html>";
+        shortName="hamburguesa";
+        m.add(new Product(name, price, img, exists, deal, desc, shortName));
         
         name = "Papas a la Francesa";
         price = 30.00f;
         img = new File(path + "images\\papas.jpg");
         exists = 27;
         deal = 5;
-        desc = "Las mejores papas del área metropolitana, cocinadas por los mismos dioses de las pizzas";
-        m.add(new Product(name, price, img, exists, deal, desc));
+        desc = "<html><body>\"Deliciosas papas, no puedes comer solo una\"</body></html>";
+        shortName="papas";
+        m.add(new Product(name, price, img, exists, deal, desc, shortName));
         
         name = "Hot Dog";
         price = 45.00f;
         img = new File(path + "images\\hotdog.jpg");
         exists = 16;
         deal = 0;
-        desc = "El mejor Hot Dog del área metropolitana, cocinado por los mismos dioses de las pizzas";
-        m.add(new Product(name, price, img, exists, deal, desc));
+        desc = "<html><body>\"Hot Dogs caseros. Come bien a un precio accesible\"</body></html>";
+        shortName="hot dog";
+        m.add(new Product(name, price, img, exists, deal, desc, shortName));
         
-        name = "Papas a la Francesa";
+        name = "Torta";
         price = 30.00f;
-        img = new File(path + "images\\papas.jpg");
+        img = new File(path + "images\\tortas.jpg");
         exists = 27;
         deal = 5;
-        desc = "Las mejores papas del área metropolitana, cocinadas por los mismos dioses de las pizzas";
-        m.add(new Product(name, price, img, exists, deal, desc));
+        desc = "<html><body>\"Las tortas más grandes del área metropolitana\"</body></html>";
+        shortName="torta";
+        m.add(new Product(name, price, img, exists, deal, desc, shortName));
         
         name = "Refresco";
         price = 15.00f;
         img = new File(path + "images\\refresco.jpg");
         exists = 99;
         deal = 0;
-        desc = "El mejor refresco del área metropolitana, cocinado por los mismos dioses de las pizzas";
-        m.add(new Product(name, price, img, exists, deal, desc));
+        desc = "<html><body>\"Refrescante, no te quedes con sed\"</body></html>";
+        shortName="refresco";
+        m.add(new Product(name, price, img, exists, deal, desc, shortName));
         
         return m;
     }
