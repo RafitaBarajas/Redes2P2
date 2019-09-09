@@ -1,9 +1,10 @@
 
 package p2;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Order {
+public class Order implements Serializable{
     private int id;
     private ArrayList<ArrayList> order; //Product ID with quantity
     

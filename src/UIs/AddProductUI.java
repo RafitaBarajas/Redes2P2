@@ -4,8 +4,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,7 +22,9 @@ import p2.Product;
 public class AddProductUI extends JFrame implements ActionListener{
     
     Socket cl;
+    DataOutputStream dos;
     ArrayList <Product> menu;
+    ObjectInputStream ois;
     Order order;
     int position;
     
@@ -25,7 +32,7 @@ public class AddProductUI extends JFrame implements ActionListener{
     JLabel name, bar, deal, unavailable, q, e;
     JButton back, plus, minus, confirm;
     
-    public AddProductUI(Socket cl, ArrayList <Product> menu, Order order, int position){
+    public AddProductUI(Socket cl, DataOutputStream dos, ObjectInputStream ois, ArrayList <Product> menu, Order order, int position){
         //basic properties
         setSize(450,300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,6 +45,8 @@ public class AddProductUI extends JFrame implements ActionListener{
         this.menu = menu;
         this.order = order;
         this.position = position;
+        this.dos = dos ;
+        this.ois = ois;
         
         initializeFrame();
         
@@ -154,8 +163,13 @@ public class AddProductUI extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if( e.getSource() == back ){
+            try {
+                dos.writeInt(-1);
+            } catch (IOException ex) {
+                Logger.getLogger(AddProductUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
             dispose();
-            MainPage mp = new MainPage(cl, menu, order);
+            MainPage mp = new MainPage(cl,dos,ois, menu, order);
         }
         else if( e.getSource() == plus){
             int a = Integer.parseInt(q.getText().toString());
@@ -177,8 +191,14 @@ public class AddProductUI extends JFrame implements ActionListener{
             order.add(position, a);
             menu.get(position).setExistance(menu.get(position).getExistance()-a);
             
+            try {
+                dos.writeInt(-1);
+            } catch (IOException ex) {
+                Logger.getLogger(AddProductUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             dispose();
-            MainPage mp = new MainPage(cl, menu, order);
+            MainPage mp = new MainPage(cl, dos, ois, menu, order);
         }
     }
     

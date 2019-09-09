@@ -47,6 +47,30 @@ public class Product implements Serializable {
         ids.add(id);
     }
     
+    public static String findNameByID(int id){
+        String name = "";
+        if( id == 0 ){
+            name = "Pizza";
+        }
+        else if( id == 1 ){
+            name = "Hamburguesa";
+        }
+        else if( id == 2 ){
+            name = "Papas";
+        }
+        else if( id == 3 ){
+            name = "Hot Dog";
+        }
+        else if( id == 4 ){
+            name = "Torta";
+        }
+        else if( id == 5 ){
+            name = "Refresco";
+        }
+        
+        return name;
+    }
+    
     private static int newID(){
         int idcheck = 0;
         

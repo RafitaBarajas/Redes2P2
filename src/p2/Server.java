@@ -2,8 +2,11 @@
 package p2;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -12,7 +15,8 @@ public class Server {
     
     //static String path = "C:\\Users\\alumno\\Desktop\\Server\\";
     //static String path = "C:\\Users\\grafi_000\\Desktop\\Server\\";
-    static String path ="C:\\Users\\chistopher\\Desktop\\Server\\";
+    static String path = "C:\\Users\\chistopher\\Desktop\\Server\\images";
+    static String pathD = "C:\\Users\\chistopher\\Desktop\\Client\\";
 
     public static void main(String[] args) {
         
@@ -32,25 +36,59 @@ public class Server {
                 Socket cl = s.accept();
                 System.out.println("Cliente entrando...");
                 
+                /* Enviar imagenes 
+                DataOutputStream dos = new DataOutputStream(cl.getOutputStream());
+                   
+                File f = new File(path);
+
+                if(f.isDirectory()){
+                    sendDirectory(cl, dos, f, "");
+                } else {
+                    sendFile(cl, dos, f, "");
+                }
+
+                dos.close();
+                */
+                
                 ObjectOutputStream oos = new ObjectOutputStream(cl.getOutputStream());
                 DataInputStream dis = new DataInputStream(cl.getInputStream());
                 
                 System.out.println("Entregando carta...");
                 oos.writeObject(menu);
                 oos.flush();
+                //oos.close();
                 
-                /*int option= dis.readInt();
                 
+                int option = -1;
+                
+                while( option == -1){
+                    System.out.println("Esperando orden..");
+                    option = dis.readInt();
+                }
                 
                 if( option == 1 ){
                     //Server receives an Order object, then sends a Ticket
+                    ObjectInputStream ois = new ObjectInputStream(cl.getInputStream());
+                    
+                    Order o = (Order) ois.readObject();
+                    System.out.println("Orden recibida, generando ticket...");
+                    
+                    Ticket t = new Ticket(menu, o);
+                    oos.writeObject(t);
+                    oos.flush();
+                    System.out.println("Ticket enviado");
+                    
+                    menu = (ArrayList<Product>)ois.readObject();
+                    System.out.println("Disponibilidad actualizada");
+                    
+                    ois.close();
+                    dis.close();
+                    oos.close();
+                    cl.close();
+                    
                 }
-                else if( option == 0 ){
-                    //Client disconected, receives a menu to update existance quantities
-                }
-                */
                 
-                oos.close();
+                
                 //cerrar ois
             }
         
@@ -72,10 +110,10 @@ public class Server {
         name = "Pizza de Peperoni";
         price = 79.00f;
         img = new File[3];
-        img[0]=new File(path + "images\\pizzaPepe0.png");
-        img[1]=new File(path + "images\\pizzaPepe1.png");
-        img[2]=new File(path + "images\\pizzaPepe2.png");
-        exists = 0;
+        img[0]=new File(pathD + "images\\pizzaPepe0.jpg");
+        img[1]=new File(pathD + "images\\pizzaPepe1.jpg");
+        img[2]=new File(pathD + "images\\pizzaPepe2.jpg");
+        exists = 8;
         deal = 10;
         desc = "<html><body>\"La mejor pizza del área metropolitana, cocinada por los dioses de las pizzas\"</body></html>";
         shortName="pizza";
@@ -84,9 +122,9 @@ public class Server {
         name = "Hamburguesa de Pollo";
         price = 53.00f;
         img = new File[3];
-        img[0]=new File(path + "images\\hamPollo0.jpg");
-        img[1]=new File(path + "images\\hamPollo1.jpg");
-        img[2]=new File(path + "images\\hamPollo2.jpg");
+        img[0]=new File(pathD + "images\\hamPollo0.jpg");
+        img[1]=new File(pathD + "images\\hamPollo1.jpg");
+        img[2]=new File(pathD + "images\\hamPollo2.jpg");
         exists = 13;
         deal = 15;
         desc = "<html><body>\"La mejor hamburguesa del área metropolitana, cocinada por Bob Esponja\"</body></html>";
@@ -96,9 +134,9 @@ public class Server {
         name = "Papas a la Francesa";
         price = 30.00f;
         img = new File[3];
-        img[0]=new File(path + "images\\papas0.jpg");
-        img[1]=new File(path + "images\\papas1.jpg");
-        img[2]=new File(path + "images\\papas2.jpg");
+        img[0]=new File(pathD + "images\\papas0.jpg");
+        img[1]=new File(pathD + "images\\papas1.jpg");
+        img[2]=new File(pathD + "images\\papas2.jpg");
         exists = 27;
         deal = 5;
         desc = "<html><body>\"Deliciosas papas, no puedes comer solo una\"</body></html>";
@@ -108,9 +146,9 @@ public class Server {
         name = "Hot Dog";
         price = 45.00f;
         img = new File[3];
-        img[0]=new File(path + "images\\hotdog0.png");
-        img[1]=new File(path + "images\\hotdog1.png");
-        img[2]=new File(path + "images\\hotdog2.png");
+        img[0]=new File(pathD + "images\\hotdog0.jpg");
+        img[1]=new File(pathD + "images\\hotdog1.jpg");
+        img[2]=new File(pathD + "images\\hotdog2.jpg");
         exists = 16;
         deal = 0;
         desc = "<html><body>\"Hot Dogs caseros. Come bien a un precio accesible\"</body></html>";
@@ -120,9 +158,9 @@ public class Server {
         name = "Torta";
         price = 30.00f;
         img = new File[3];
-        img[0]=new File(path + "images\\tortas0.jpg");
-        img[1]=new File(path + "images\\tortas1.jpg");
-        img[2]=new File(path + "images\\tortas2.jpg");
+        img[0]=new File(pathD + "images\\tortas0.jpg");
+        img[1]=new File(pathD + "images\\tortas1.jpg");
+        img[2]=new File(pathD + "images\\tortas2.jpg");
         exists = 27;
         deal = 5;
         desc = "<html><body>\"Las tortas más grandes del área metropolitana\"</body></html>";
@@ -132,9 +170,9 @@ public class Server {
         name = "Refresco";
         price = 15.00f;
         img = new File[3];
-        img[0]=new File(path + "images\\refresco0.jpg");
-        img[1]=new File(path + "images\\refresco1.jpg");
-        img[2]=new File(path + "images\\refresco2.jpg");
+        img[0]=new File(pathD + "images\\refresco0.jpg");
+        img[1]=new File(pathD + "images\\refresco1.jpg");
+        img[2]=new File(pathD + "images\\refresco2.jpg");
         exists = 99;
         deal = 0;
         desc = "<html><body>\"Refrescante, no te quedes con sed\"</body></html>";
@@ -142,6 +180,89 @@ public class Server {
         m.add(new Product(name, price, img, exists, deal, desc, shortName));
         
         return m;
+    }
+    
+    public static void sendFile(Socket cl, DataOutputStream dos, File f, String parent){
+        
+        try{
+            String nombre = parent + "\\" + f.getName();
+            long tam = f.length();
+            String ruta = f.getAbsolutePath();
+            
+            FileInputStream fis = new FileInputStream(ruta);
+            DataInputStream dis = new DataInputStream(fis);
+
+            System.out.println("Ruta " + ruta);
+            
+            dos.writeInt(2);
+            dos.flush();
+            dos.writeUTF(nombre);
+            dos.flush();
+            dos.writeLong(tam);
+            dos.flush();
+
+            long enviados = 0;
+            int n;
+
+            while(enviados < tam){
+                byte[] b = new byte[2000];
+                n = dis.read(b);
+                enviados = enviados + n;
+
+                dos.write(b, 0, n);
+                dos.flush();
+            }
+
+            System.out.println("Archivo enviado.");
+
+            fis.close();
+            dis.close();
+        
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        
+    }
+    
+    public static void sendDirectory(Socket cl, DataOutputStream dos, File f, String parent){
+        try{
+            
+            String nombre = parent + "\\" + f.getName();
+            String ruta = f.getAbsolutePath();
+            
+            
+            System.out.println("Ruta " + ruta);
+            
+            dos.writeInt(1);
+            dos.flush();
+            dos.writeUTF(nombre);
+            dos.flush();
+
+            System.out.println("Directorio enviado.");
+            
+            File[] files = f.listFiles();
+            
+            if(files != null){
+                dos.writeInt(files.length);
+                dos.flush();
+                for (int i = 0; i < files.length; i++) {
+                    
+                    if(files[i].isDirectory()){
+                        sendDirectory(cl, dos, files[i], nombre);
+                    } else {
+                        sendFile(cl, dos, files[i], nombre);
+                    }
+                }
+            } else {
+                dos.writeInt(0);
+                dos.flush();
+            }
+            
+        
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        
     }
     
 }

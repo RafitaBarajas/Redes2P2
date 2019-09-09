@@ -1,9 +1,10 @@
 
 package p2;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Ticket {
+public class Ticket implements Serializable{
     
     private ArrayList<ArrayList> products;
     
@@ -23,8 +24,9 @@ public class Ticket {
         for (int i = 0; i < order.getLenght(); i++) {
             for (int j = 0; j < menu.size(); j++) {
                 if (order.getProductID(i) == menu.get(j).getId()){
+                    float discount = (menu.get(j).getPrice() * ((float)menu.get(j).getDeal()/100));
                     products.get(0).add(menu.get(j).getName());
-                    products.get(2).add((float)order.getQty(i) * menu.get(j).getPrice());
+                    products.get(2).add((float)order.getQty(i) * (menu.get(j).getPrice()-discount));
                 }
             }
             
@@ -36,11 +38,15 @@ public class Ticket {
         return products.get(0).size();
     }
     
+    public ArrayList<ArrayList> getProducts(){
+        return products;
+    }
+    
     public float getTotal(){
         float total = 0;
         
         for(int i = 0; i < this.getNumProducts(); i++){
-            total = total + (float)products.get(3).get(i);
+            total = total + (float)products.get(2).get(i);
         }
         
         return total;
