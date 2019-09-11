@@ -13,9 +13,7 @@ import java.util.ArrayList;
 
 public class Server {
     
-    //static String path = "C:\\Users\\alumno\\Desktop\\Server\\";
-    //static String path = "C:\\Users\\grafi_000\\Desktop\\Server\\";
-    static String path = "C:\\Users\\chistopher\\Desktop\\Server\\images";
+    static String pathO = "C:\\Users\\chistopher\\Desktop\\Server\\";
     static String pathD = "C:\\Users\\chistopher\\Desktop\\Client\\";
 
     public static void main(String[] args) {
@@ -36,19 +34,19 @@ public class Server {
                 Socket cl = s.accept();
                 System.out.println("Cliente entrando...");
                 
-                /* Enviar imagenes 
-                DataOutputStream dos = new DataOutputStream(cl.getOutputStream());
+                // Enviar imagenes 
+                //DataOutputStream dos = new DataOutputStream(cl.getOutputStream());
                    
-                File f = new File(path);
+                //File f = new File(pathO);
 
-                if(f.isDirectory()){
-                    sendDirectory(cl, dos, f, "");
-                } else {
-                    sendFile(cl, dos, f, "");
-                }
+                //if(f.isDirectory()){
+                //    sendDirectory(cl, dos, f, "");
+                //} else {
+                //    sendFile(cl, dos, f, "");
+                //}
 
-                dos.close();
-                */
+                //dos.close();
+                System.out.println("Enviando galería...");
                 
                 ObjectOutputStream oos = new ObjectOutputStream(cl.getOutputStream());
                 DataInputStream dis = new DataInputStream(cl.getInputStream());
@@ -88,8 +86,6 @@ public class Server {
                     
                 }
                 
-                
-                //cerrar ois
             }
         
         } catch (Exception e){
@@ -110,9 +106,9 @@ public class Server {
         name = "Pizza de Peperoni";
         price = 79.00f;
         img = new File[3];
-        img[0]=new File(pathD + "images\\pizzaPepe0.jpg");
-        img[1]=new File(pathD + "images\\pizzaPepe1.jpg");
-        img[2]=new File(pathD + "images\\pizzaPepe2.jpg");
+        img[0]=new File(pathD + "pizzaPepe0.jpg");
+        img[1]=new File(pathD + "pizzaPepe1.jpg");
+        img[2]=new File(pathD + "pizzaPepe2.jpg");
         exists = 8;
         deal = 10;
         desc = "<html><body>\"La mejor pizza del área metropolitana, cocinada por los dioses de las pizzas\"</body></html>";
@@ -122,9 +118,9 @@ public class Server {
         name = "Hamburguesa de Pollo";
         price = 53.00f;
         img = new File[3];
-        img[0]=new File(pathD + "images\\hamPollo0.jpg");
-        img[1]=new File(pathD + "images\\hamPollo1.jpg");
-        img[2]=new File(pathD + "images\\hamPollo2.jpg");
+        img[0]=new File(pathD + "hamPollo0.jpg");
+        img[1]=new File(pathD + "hamPollo1.jpg");
+        img[2]=new File(pathD + "hamPollo2.jpg");
         exists = 13;
         deal = 15;
         desc = "<html><body>\"La mejor hamburguesa del área metropolitana, cocinada por Bob Esponja\"</body></html>";
@@ -134,9 +130,9 @@ public class Server {
         name = "Papas a la Francesa";
         price = 30.00f;
         img = new File[3];
-        img[0]=new File(pathD + "images\\papas0.jpg");
-        img[1]=new File(pathD + "images\\papas1.jpg");
-        img[2]=new File(pathD + "images\\papas2.jpg");
+        img[0]=new File(pathD + "papas0.jpg");
+        img[1]=new File(pathD + "papas1.jpg");
+        img[2]=new File(pathD + "papas2.jpg");
         exists = 27;
         deal = 5;
         desc = "<html><body>\"Deliciosas papas, no puedes comer solo una\"</body></html>";
@@ -146,9 +142,9 @@ public class Server {
         name = "Hot Dog";
         price = 45.00f;
         img = new File[3];
-        img[0]=new File(pathD + "images\\hotdog0.jpg");
-        img[1]=new File(pathD + "images\\hotdog1.jpg");
-        img[2]=new File(pathD + "images\\hotdog2.jpg");
+        img[0]=new File(pathD + "hotdog0.jpg");
+        img[1]=new File(pathD + "hotdog1.jpg");
+        img[2]=new File(pathD + "hotdog2.jpg");
         exists = 16;
         deal = 0;
         desc = "<html><body>\"Hot Dogs caseros. Come bien a un precio accesible\"</body></html>";
@@ -158,9 +154,9 @@ public class Server {
         name = "Torta";
         price = 30.00f;
         img = new File[3];
-        img[0]=new File(pathD + "images\\tortas0.jpg");
-        img[1]=new File(pathD + "images\\tortas1.jpg");
-        img[2]=new File(pathD + "images\\tortas2.jpg");
+        img[0]=new File(pathD + "tortas0.jpg");
+        img[1]=new File(pathD + "tortas1.jpg");
+        img[2]=new File(pathD + "tortas2.jpg");
         exists = 27;
         deal = 5;
         desc = "<html><body>\"Las tortas más grandes del área metropolitana\"</body></html>";
@@ -170,9 +166,9 @@ public class Server {
         name = "Refresco";
         price = 15.00f;
         img = new File[3];
-        img[0]=new File(pathD + "images\\refresco0.jpg");
-        img[1]=new File(pathD + "images\\refresco1.jpg");
-        img[2]=new File(pathD + "images\\refresco2.jpg");
+        img[0]=new File(pathD + "refresco0.jpg");
+        img[1]=new File(pathD + "refresco1.jpg");
+        img[2]=new File(pathD + "refresco2.jpg");
         exists = 99;
         deal = 0;
         desc = "<html><body>\"Refrescante, no te quedes con sed\"</body></html>";
@@ -215,8 +211,6 @@ public class Server {
 
             System.out.println("Archivo enviado.");
 
-            fis.close();
-            dis.close();
         
         }catch (Exception e){
             e.printStackTrace();

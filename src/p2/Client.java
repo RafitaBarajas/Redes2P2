@@ -15,39 +15,32 @@ public class Client {
 
     static int pto = 9000;
     static String host = "localhost";
-    //static String path = "C:\\Users\\Rafael Barajas\\Desktop\\";
-    //static String path = "C:\\Users\\alumno\\Desktop\\";
     static String path = "C:\\Users\\chistopher\\Desktop\\Client\\";
     
     public static void main(String[] args) {
         
         ArrayList<Product> menu = new ArrayList<Product>();
         Order order;
-        int nFiles;
         
         try{
             Socket cl = new Socket(host, pto);
             System.out.println("Entrando al restaurante...");
             
-            /*descargar imagenes
-            download(cl);
-            */
+            /*descargar imagenes*/
+            //download(cl);
+            System.out.println("Recibiendo galería...");
             
             DataOutputStream dos = new DataOutputStream(cl.getOutputStream());
             ObjectInputStream ois = new ObjectInputStream(cl.getInputStream());
             
             System.out.println("Recibiendo carta");
             menu = (ArrayList<Product>)ois.readObject();
-            //ois.close();
             
             order= new Order();
             
             
             MainPage r = new MainPage(cl,dos, ois,menu, order);
-            
-
-            
-            //oos.close();
+            /*Los flujos y el socket se cierran cuando acaba la ejecución de TicketUI*/
 
             
         } catch(Exception e){
@@ -83,10 +76,6 @@ public class Client {
             
             String nombre;
             long tam;
-            //Socket cl = new Socket(host, pto);
-            
-            //DataOutputStream dos = new DataOutputStream(cl.getOutputStream());
-            //DataInputStream dis = new DataInputStream(cl.getInputStream());
             
             nombre = dis.readUTF();
             tam = dis.readLong();
@@ -113,10 +102,7 @@ public class Client {
             System.out.println("Archivo recibido.");
                         
             fos.close();
-            //dos.close();
             dos2.close();
-            //dis.close();
-            //cl.close();
 
         }catch(Exception e){
             e.printStackTrace();
@@ -125,7 +111,6 @@ public class Client {
     
     public static void downloadDirectory(Socket cl, DataOutputStream dos, DataInputStream dis){
         try{
-            //DataInputStream dis = new DataInputStream(cl.getInputStream());
             
             String nombre = dis.readUTF();
             
@@ -153,7 +138,6 @@ public class Client {
                 }
             }
             
-            //dis.close();
         }catch(Exception e){
             e.printStackTrace();
         }

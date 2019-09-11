@@ -86,7 +86,7 @@ public class AddProductUI extends JFrame implements ActionListener{
         
         //add-one-more button
         plus= new JButton("+");
-        plus.setBounds(25,120, 50,50);
+        plus.setBounds(145,120, 50,50);
         plus.setFont(new Font("Arial",1,14));
         plus.setForeground(Color.WHITE);
         plus.setBackground(new Color(245,72,40));
@@ -100,7 +100,7 @@ public class AddProductUI extends JFrame implements ActionListener{
         
         //remove-one button
         minus= new JButton("-");
-        minus.setBounds(145,120, 50,50);
+        minus.setBounds(25,120, 50,50);
         minus.setFont(new Font("Arial",1,14));
         minus.setForeground(Color.WHITE);
         minus.setBackground(new Color(245,72,40));
@@ -129,9 +129,9 @@ public class AddProductUI extends JFrame implements ActionListener{
             if( menu.get(position).getDeal() != 0){
                 
                 e.setBounds(25,100, 400,20);
-                plus.setBounds(25,135, 50,50);
+                minus.setBounds(25,135, 50,50);
                 q.setBounds(105,135, 50,50);
-                minus.setBounds(145,135, 50,50);
+                plus.setBounds(145,135, 50,50);
                 
                 bg.add(deal);
             }

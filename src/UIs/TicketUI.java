@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.math.RoundingMode;
 import java.net.Socket;
+import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -69,18 +71,55 @@ public class TicketUI extends JFrame implements ActionListener{
         bar.setForeground(new Color(245,72,40));
         bg.add(bar);
         
+        product = new JLabel("Nombre");
+        product.setBounds(25,90, 500,20);
+        product.setFont(new Font("Arial",1,14));
+        product.setForeground(Color.BLACK);
+        bg.add(product);
+        
+        product = new JLabel("Cantidad");
+        product.setBounds(185,90, 500,20);
+        product.setFont(new Font("Arial",1,14));
+        product.setForeground(Color.BLACK);
+        bg.add(product);
+        
+        product = new JLabel("Precio");
+        product.setBounds(345,90, 500,20);
+        product.setFont(new Font("Arial",1,14));
+        product.setForeground(Color.BLACK);
+        bg.add(product);
+        
         for (int i = 0; i < t.getNumProducts(); i++) {
-            //product name, quantity and price
-            product = new JLabel(t.getProducts().get(0).get(i).toString()+"--- C("+t.getProducts().get(1).get(i).toString()+")--- T("+t.getProducts().get(2).get(i).toString()+")");
-            product.setBounds(25,90+(40*i), 500,20);
-            product.setFont(new Font("Arial",1,14));
+            //product name
+            product = new JLabel(t.getProducts().get(0).get(i).toString());
+            product.setBounds(25,130+(40*i), 500,20);
+            product.setFont(new Font("Arial",0,14));
             product.setForeground(Color.BLACK);
+            bg.add(product);
+            
+            //product quantity
+            product = new JLabel(t.getProducts().get(1).get(i).toString());
+            product.setBounds(185,130+(40*i), 75,20);
+            product.setFont(new Font("Arial",0,14));
+            product.setForeground(Color.BLACK);
+            product.setHorizontalAlignment(JLabel.CENTER);
+            bg.add(product);
+            
+            //product price
+            product = new JLabel("$"+t.getProducts().get(2).get(i).toString());
+            product.setBounds(345,130+(40*i), 500,20);
+            product.setFont(new Font("Arial",0,14));
+            product.setForeground(Color.BLACK);
+            product.setHorizontalAlignment(JLabel.LEFT);
             bg.add(product);
         }
         
+        DecimalFormat df = new DecimalFormat("#.#");
+        df.setRoundingMode(RoundingMode.CEILING);
+        
         //product name, quantity and price
-        total = new JLabel("Total= "+t.getTotal());
-        total.setBounds(25,350, 500,20);
+        total = new JLabel("Total $"+df.format(t.getTotal()));
+        total.setBounds(25,380, 500,20);
         total.setFont(new Font("Arial",1,20));
         total.setForeground(Color.BLACK);
         bg.add(total);
